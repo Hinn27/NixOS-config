@@ -38,7 +38,7 @@
 
   # TODO: Set your username
   home = {
-    username = "hinne";
+    username = "hinNixOS";
     homeDirectory = "/home/hinne";
   };
 
