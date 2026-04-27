@@ -43,10 +43,19 @@
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  # packages:
+  home.packages = with pkgs; [
+    git
+    neovim
+    vscode
+    vlc
+    discord
+    telegram
+    datagrip
+    podman
+  ];
 
-  # Enable home-manager and git
+  # home-manager and git
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
@@ -61,6 +70,9 @@
       push.autoSetupRemote = true;
     };
   };
+
+  # neovim
+  programs.neovim.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";
