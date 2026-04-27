@@ -88,4 +88,16 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
+};
+
+# home-manager chay nhu module cua NixOS
+{ inputs, ... }: {
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users."username_cua_ban" = import ../home-manager/home.nix;
+  };
 }
