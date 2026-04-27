@@ -62,7 +62,7 @@
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" "networkmanager" "audio" "video" ];  # thêm group hữu ích
+      extraGroups = [ "wheel" "networkmanager" "audio" "video" ]; # thêm group hữu ích
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
@@ -82,12 +82,32 @@
     };
   };
 
+  # === Bootloader configuration cho Dual Boot (dùng GRUB) ===
+  boot.loader = {
+    # Tắt systemd-boot vì đang dùng GRUB
+    systemd-boot.enable = false;
+
+    # Cấu hình GRUB cho dual boot với Windows
+    grub = {
+      enable = true;
+      efiSupport = true;
+      useOSProber = true;        # Quan trọng: tự động tìm Windows
+      device = "nodev";          # Dùng EFI mode
+      # configurationLimit = 10; # Giới hạn số generation để tránh đầy /boot (có thể mở sau)
+    };
+
+    efi = {
+      canTouchEfiVariables = true;
+      # efiSysMountPoint = "/boot";  # Comment lại vì có thể gây lỗi với một số máy
+    };
+  };
+
   # home-manager chay nhu module cua NixOS
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.hinne = import ../home-manager/home.nix;   # dùng hinne không cần ngoặc kép
+    users.hinne = import ../home-manager/home.nix; # dùng hinne không cần ngoặc kép
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
