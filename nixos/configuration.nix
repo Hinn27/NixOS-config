@@ -12,11 +12,9 @@
     # If you want to use modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
-     inputs.home-manager.nixosModules.home-manager
-
+    inputs.home-manager.nixosModules.home-manager
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -26,7 +24,6 @@
     overlays = [
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-
       # Or define it inline, for example:
       # (final: prev: {
       #   hi = final.hello.overrideAttrs (oldAttrs: {
@@ -52,25 +49,23 @@
     channel.enable = false;
   };
 
-  # FIXME: Add the rest of your current configuration
-
   # TODO: Set your hostname
-  networking.hostName = "your-hostname";
+  networking.hostName = "hinne";
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
     # FIXME: Replace with your username
-    hinNixOS= {
+    hinne = {
       # TODO: You can set an initial password for your user.
       # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
       # Be sure to change it (using passwd) after rebooting!
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
+      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
+      extraGroups = [ "wheel" "networkmanager" "audio" "video" ];  # thêm group hữu ích
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
     };
   };
 
@@ -87,12 +82,12 @@
     };
   };
 
-# home-manager chay nhu module cua NixOS
+  # home-manager chay nhu module cua NixOS
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."hinne" = import ../home-manager/home.nix;
+    users.hinne = import ../home-manager/home.nix;   # dùng hinne không cần ngoặc kép
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
