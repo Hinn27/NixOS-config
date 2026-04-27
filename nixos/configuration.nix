@@ -12,6 +12,7 @@
     # If you want to use modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
+     inputs.home-manager.nixosModules.home-manager
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -86,17 +87,14 @@
     };
   };
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "25.11";
-
 # home-manager chay nhu module cua NixOS
-{ inputs, ... }: {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
-
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."username_cua_ban" = import ../home-manager/home.nix;
+    users."hinne" = import ../home-manager/home.nix;
   };
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "25.11";
 }
