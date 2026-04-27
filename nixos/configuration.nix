@@ -82,18 +82,15 @@
     };
   };
 
-  # === Bootloader configuration cho Dual Boot (dùng GRUB) ===
   boot.loader = {
-    # Tắt systemd-boot vì đang dùng GRUB
-    systemd-boot.enable = false;
+    systemd-boot.enable = lib.mkForce false;
 
-    # Cấu hình GRUB cho dual boot với Windows
     grub = {
       enable = true;
       efiSupport = true;
-      useOSProber = true;        # Quan trọng: tự động tìm Windows
-      device = "nodev";          # Dùng EFI mode
-      # configurationLimit = 10; # Giới hạn số generation để tránh đầy /boot (có thể mở sau)
+      useOSProber = true;        # tự động tìm Windows
+      device = "nodev";          # EFI mode
+      # configurationLimit = 10; # giới hạn số generation để tránh đầy /boot (có thể mở sau)
     };
 
     efi = {
