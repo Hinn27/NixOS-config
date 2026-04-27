@@ -48,7 +48,19 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Hinn27";
+    userEmail = "duc107243@donga.edu.vn";
+    signing = {
+      key = null; # thay bang ssh-ed25519 ... neu can sign commit
+      signByDefault = true;
+    };
+    extraConfig = {
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+    };
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";
