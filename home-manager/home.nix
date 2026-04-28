@@ -16,11 +16,11 @@
     # ./nvim.nix
   ];
 
-#   # TODO: Set your username
-#   home = {
-#     username = "hinNixOS";
-#     homeDirectory = "/home/hinne";
-#   };
+  # TODO: Set your username
+  home = {
+   username = "hinNixOS";
+   homeDirectory = "/home/hinne";
+  };
 
   # Add stuff for your user as you see fit:
   # packages:
