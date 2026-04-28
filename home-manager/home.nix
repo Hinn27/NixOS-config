@@ -24,15 +24,14 @@
 
   # Add stuff for your user as you see fit:
   # packages:
-  home.packages = with pkgs; [
-    git
-    vscode
-    vlc
-    discord
-    telegram-desktop
-#     datagrip
-#     podman
-  ];
+  {
+    home.packages = with pkgs; [
+      git
+      vscode
+      discord
+      telegram-desktop
+    ];
+  };
 
   # home-manager and git
   programs.home-manager.enable = true;
