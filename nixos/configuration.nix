@@ -75,21 +75,10 @@
   };
 
   boot.loader = {
-    systemd-boot.enable = lib.mkForce false;
-
-    grub = {
-      enable = true;
-      efiSupport = true;
-      useOSProber = true;        # tự động tìm Windows
-      device = "nodev";          # EFI mode
-      # configurationLimit = 10; # giới hạn số generation để tránh đầy /boot (có thể mở sau)
-    };
-
-    efi = {
-      canTouchEfiVariables = true;
-      # efiSysMountPoint = "/boot";  # Comment lại vì có thể gây lỗi với một số máy
-    };
-  };
+  systemd-boot.enable = true;
+  efi.canTouchEfiVariables = true;
+  # systemd-boot tự tìm kernel
+};
 
   # home-manager chay nhu module cua NixOS
   home-manager = {
