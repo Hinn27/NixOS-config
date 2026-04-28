@@ -102,3 +102,14 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
 }
+# nix.settings va garbage collection
+nix.settings = {
+  auto-optimise-store = true;
+  trusted-users = [ "root" "hinne" ];
+};
+
+nix.gc = {
+  automatic = true;
+  dates = "weekly";
+  options = "--delete-older-than 7d";
+};
